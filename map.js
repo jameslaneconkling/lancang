@@ -48,13 +48,21 @@ var dams = L.mapbox.featureLayer()
     })
     .addTo(map);
 
-var damCount = 0;
 
+dams.on('ready', function(){
+    var damCount = -1;
+    document.getElementById('button').addEventListener('click',cycleDams);
 
-var cycleDams = function(dams){
-    var filter = dams.getFilter();
+    function cycleDams(){
+        damCount += 1;
 
-}
+        dams.setFilter(function(dam){
+            if(damCount === -1){return true;}
+            return dam.properties['id'] <= damCount;
+        });
+    }
+
+});
 
 
 
