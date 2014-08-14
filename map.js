@@ -13,10 +13,10 @@ var map = L.mapbox.map('map', 'chinaenvforum.map-cvdwgvbn', {
 
 
 var dams = L.mapbox.featureLayer()
-    .loadURL('china_key_dams_working_copy_en_cn.geojson')
-    .setFilter(function(dam){
-        return dam.properties['WTRSHED_EN'] === 'Lancang River (Mekong)';
-    })
+    .loadURL('data/china_lancang_dams_working_copy_en_cn.geojson')
+    // .setFilter(function(dam){
+    //     return dam.properties['WTRSHED_EN'] === 'Lancang River (Mekong)';
+    // })
     .on('layeradd', function(d){
         var dam = d.layer,
             iconSize = [25,25],
@@ -29,7 +29,6 @@ var dams = L.mapbox.featureLayer()
                 shadowAnchor: [shadowSize[0]*0.5,shadowSize[1]*0.7]
             };
 
-        // console.log(dam.feature.properties.STATUS_EN);
         if(dam.feature.properties.STATUS_EN === 'Existing Dam'){
             iconOptions['iconUrl'] = 'icon/wwc_blue.svg';
             dam.setIcon(L.icon(iconOptions));
@@ -48,6 +47,14 @@ var dams = L.mapbox.featureLayer()
         }
     })
     .addTo(map);
+
+var damCount = 0;
+
+
+var cycleDams = function(dams){
+    var filter = dams.getFilter();
+
+}
 
 
 
